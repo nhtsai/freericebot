@@ -8,6 +8,7 @@ Based on [this repo](https://github.com/eholcom/FreeRice).
 - Turn AdBlock off so they can buy the rice.
 - Specify the [Multiplication Table category](https://freerice.com/categories).
 - On the questions page, open the console (F12).
+- Click on the "Console" tab (between "Elements" and "Sources").
 - Copy and paste contents of [freericebot.js](https://raw.githubusercontent.com/nhtsai/freericebot/master/freericebot.js) into the console.
 - Scroll up to the beginning of the function `freericebot()`.
 - Specify one: `runDuration` (in hours) or `riceWanted` (in grains).
