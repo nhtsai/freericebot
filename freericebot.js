@@ -27,14 +27,14 @@ function freericebot() {
 
 
     this.timeout = 0;
-    this.riceDonated = parseInt(document.querySelector("div[class=block__body] strong").textContent.replace(",", ""));
+    this.riceDonated = parseInt(document.querySelector("div[class=rice-counter__value] span").textContent.replace(",", ""));
     this.maxRice = this.riceDonated + this.riceWanted; // rice total desired
     this.category = 0;
     FRBthis = this;
 
     this.run = function() {
         // this.riceDonated = parseInt(document.querySelector("div[class=block__body] strong").textContent.replace(",", ""));
-        this.category = document.querySelector("div[class=rice-counter__category-text").textContent;
+        this.category = document.querySelector("div[class=rice-counter__category-text]").textContent;
         console.log("have: " + this.riceDonated + "\n");
         console.log("want: " + this.maxRice + "\n");
 
