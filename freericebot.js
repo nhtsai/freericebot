@@ -33,7 +33,6 @@ function freericebot() {
     FRBthis = this;
 
     this.run = function() {
-        this.riceDonated = parseInt(document.querySelector("div[class=rice-counter__value] span").textContent.replace(",", ""));
         this.category = document.querySelector("div[class=rice-counter__category-text]").textContent;
         console.log("have: " + this.riceDonated + "\n");
         console.log("want: " + this.maxRice + "\n");
@@ -54,7 +53,7 @@ function freericebot() {
 	};
 
     this.getRice = function() {
-
+        this.riceDonated = parseInt(document.querySelector("div[class=rice-counter__value] span").textContent.replace(",", ""));
         console.log("earned: " + this.riceDonated + " / " + this.maxRice + '\n');
         if (this.maxRice > 0 && this.riceDonated >= this.maxRice) {
             return FRBthis.stop();
@@ -100,8 +99,8 @@ function freericebot() {
         else {
             button_label = "div[data-target=a" + answer.toString();
         }
+        // Click correct button label
         document.querySelector(button_label).click();
-//         this.riceDonated = this.riceDonated + 10;
     }
 }
 
