@@ -1,7 +1,7 @@
 /**
  * FreeRiceBot Javascript Function
  * Author: Nathan Tsai
- * Last Updated: May 2020
+ * Last Updated: Jan 2021
  */
 
 /**
