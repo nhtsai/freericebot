@@ -1,8 +1,12 @@
 /**
  * FreeRiceBot Javascript Function
  * Author: Nathan Tsai
- * Last Updated: Jan 2021
+ * Last Updated: Apr 2022
  */
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 /**
  * FreeRiceBot function to automatically answer freerice.com questions until:
@@ -20,9 +24,7 @@ function freericebot() {
     // all possible answers
     // document.querySelectorAll("div.card-button")
 
-
-    /****** Set ONE of these two variables before the bot is run ******/
-    this.runDuration = 0; // run duration in hours
+    /*** SET THIS VARIABLE BEFORE RUNNING THE BOT ***/
     this.riceWanted = 30; // amount of rice wanted
 
 
@@ -32,31 +34,29 @@ function freericebot() {
     this.category = 0;
     FRBthis = this;
 
-    this.run = function() {
+    this.run = async function() {
         this.category = document.querySelector("div[class=rice-counter__category-text]").textContent;
         console.log("have: " + this.riceDonated + "\n");
         console.log("want: " + this.maxRice + "\n");
 
-        FRBthis.runLoop();
-        if (this.runDuration > 0) {
-            setTimeout(FRBthis.stop, 1000*60*60*this.runDuration);
+        // run bot with 6-8 second intervals until max rice reached
+        while(true) {
+            ret = FRBthis.getRice();
+            if (ret != 0) {
+                break;
+            }
+            delay = 6000 + Math.random() * 2000;
+            await sleep(delay);
+
         }
     }
 
-    this.runLoop = function() {
-        FRBthis.getRice();
-        timeout = setTimeout(FRBthis.runLoop, 3000 + Math.random()*2500);    
-    }
-
-    this.stop = function() {
-		clearTimeout(this.timeout);
-	};
-
     this.getRice = function() {
         this.riceDonated = parseInt(document.querySelector("div[class=rice-counter__value] span").textContent.replace(",", ""));
-        console.log("earned: " + this.riceDonated + " / " + this.maxRice + '\n');
-        if (this.maxRice > 0 && this.riceDonated >= this.maxRice) {
-            return FRBthis.stop();
+        console.log("earned: " + this.riceDonated + " / " + this.maxRice + "\n");
+        if (this.riceDonated >= this.maxRice) {
+            console.log("stopping bot");
+            return 1;
         }
 
         question = document.getElementsByClassName("card-title")[0].textContent;
@@ -82,7 +82,6 @@ function freericebot() {
             }
             // Handle fraction questions
             else if (question.includes("")) {
-
             }
             // Handle other operation questions
             else {
@@ -91,16 +90,10 @@ function freericebot() {
             }
         }
 
-        // Find target button label
-        button_label = 0;
-        if (answer < 0) {
-            button_label = "div[data-target=a" + Math.abs(answer).toString() + "m";
-        }
-        else {
-            button_label = "div[data-target=a" + answer.toString();
-        }
-        // Click correct button label
-        document.querySelector(button_label).click();
+        // Find target button element
+        button = [...document.querySelectorAll("div.card-button")].filter(div => div.innerText == (answer).toString())[0]
+        button.click();
+        return 0;
     }
 }
 

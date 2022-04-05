@@ -11,10 +11,8 @@ Based on [this repo](https://github.com/eholcom/FreeRice).
 - Click on the "Console" tab (between "Elements" and "Sources").
 - Copy and paste contents of [freericebot.js](https://raw.githubusercontent.com/nhtsai/freericebot/master/freericebot.js) into the console.
 - Scroll up to the beginning of the function `freericebot()`.
-- Specify one: `runDuration` (in hours) or `riceWanted` (in grains).
-- Set the other variable (`runDuration` or `riceWanted`) to `0`.
-- Bot earns 30 rice if `runDuration` or `riceWanted` not specified.
-- Press enter and let the bot earn you some rice.
+- Specify `riceWanted` (in grains).
+    - Note: The bot may undercount due to the gradual increase of rice earned counter.
+- Bot earns 30 rice if `riceWanted` is not specified.
+- Press enter and let the bot earn you some rice, every 6 to 8 seconds.
 - Eat rice.
-
-
